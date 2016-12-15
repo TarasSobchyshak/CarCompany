@@ -11,15 +11,16 @@ namespace CarCompany.DataContext
         public override void InitializeDatabase(DataContext context)
         {
             var cars = new List<Car>();
+            var rand = new Random();
 
             for (int i = 0; i < 50; ++i)
             {
                 cars.Add(new Car()
                 {
-                    Mileage = new Random().Next(1000, 1000000),
-                    Brand = $"BMW {new Random().Next(12, 98)}",
-                    Year = new Random().Next(1970, 2016),
-                    Price = new Random().Next(100000, 10000000)
+                    Mileage = rand.Next(1000, 1000000),
+                    Brand = $"BMW {rand.Next(12, 98)}",
+                    Year = rand.Next(1970, 2016),
+                    Price = rand.Next(100000, 10000000)
                 }
                     );
             }

@@ -1,4 +1,6 @@
 ﻿using CarCompany.Entites;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,13 +35,19 @@ namespace CarCompany.Controllers
         public ActionResult Cars()
         {
             ViewBag.Message = "View our cars";
+
+            return View();
+        }
+
+        public ActionResult ReadCars([DataSourceRequest]DataSourceRequest request)
+        {
             List<Car> cars = null;
             using (var context = new DataContext.DataContext())
             {
                 cars = context.Cars.ToList();
             }
 
-            return View(cars);
+            return Json(cars.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
         }
     }
 }
