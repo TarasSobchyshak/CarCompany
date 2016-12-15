@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarCompany.Entites;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,23 +11,35 @@ namespace CarCompany.Controllers
     {
         public ActionResult Index()
         {
-            ViewBag.Message = "Welcome to ASP.NET MVC!";
+            ViewBag.Message = "Welcome to CarCompany";
 
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your app description page.";
+            ViewBag.Message = "";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Contact us for more information.";
 
             return View();
+        }
+
+        public ActionResult Cars()
+        {
+            ViewBag.Message = "View our cars";
+            List<Car> cars = null;
+            using (var context = new DataContext.DataContext())
+            {
+                cars = context.Cars.ToList();
+            }
+
+            return View(cars);
         }
     }
 }
